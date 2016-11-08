@@ -99,9 +99,9 @@ public class NightInTheCity : MonoBehaviour {
 
 			room_west = "hallway";
 
-			myText = "You are in the kitchen.";
+			myText = "You are in the subway.";
 			if (!hasKey){
-				myText += " You see something sparkling in the drain. Press \"i\" to inspect.";
+				myText += " You see something lit up on the tracks. Press \"i\" to inspect.";
 
 				if (Input.GetKeyDown(KeyCode.I)){
 
@@ -113,10 +113,10 @@ public class NightInTheCity : MonoBehaviour {
 
 		}  else if (currentRoom == "drain"){
 			//changing background color and text color
-			mainCam.backgroundColor = Color.green;
-			GetComponent<Text>().color = Color.blue;
+			mainCam.backgroundColor = Color.white;
+			GetComponent<Text>().color = Color.black;
 
-			myText = "You found a key!!! NOICE. Press spacebar to return to the kitchen.";
+			myText = "You found your phone! Press spacebar to return to the kitchen.";
 			if (!hasKey) {
 				sfxSource.Play();
 			}
@@ -138,7 +138,7 @@ public class NightInTheCity : MonoBehaviour {
 
 			} else {
 
-				myText = "Sorry, you unlucky person, you need a key.\n\n Press space to return to the hallway";
+				myText = "Sorry, you unlucky person, you need a key.\n\n Press space to return to the subway";
 
 				if (Input.GetKeyDown(KeyCode.Space)) {
 					currentRoom = "hallway";
@@ -149,7 +149,7 @@ public class NightInTheCity : MonoBehaviour {
 
 		} else {
 
-			myText = "You have fallen into a void because the game designer is a garbage game designer and the developer is bad too and some variable is set wrong, specifically currentRoom.";
+			myText = "You have fallen into a void.";
 
 		}
 
