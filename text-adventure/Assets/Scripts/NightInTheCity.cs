@@ -39,7 +39,7 @@ public class NightInTheCity : MonoBehaviour {
 		
 
 		//deactivate picture if you're not in the title page or win room
-		if (currentRoom == "title" || (currentRoom == "locked door" && hasKey))
+		if (currentRoom == "title" || (currentRoom == "bar" && hasKey))
 		{
 			city.enabled = true;
 		} else {
@@ -50,7 +50,7 @@ public class NightInTheCity : MonoBehaviour {
 		}
 
 		//only activate key image if you don't have the key, or you've used it to win
-		if (currentRoom == "locked door" || !hasKey)
+		if (currentRoom == "bar" || !hasKey)
 		{
 			keyImage.enabled = false;
 		} else {
@@ -77,27 +77,30 @@ public class NightInTheCity : MonoBehaviour {
 			myText = "Night in the City\n\nBy Anna Stassen\n\nPress Space to Begin";
 
 			if (Input.GetKeyDown(KeyCode.Space)) {
-				currentRoom = "entry";
+				currentRoom = "Washington Square Park";
 			}
-		} else if (currentRoom == "entry"){
+		} else if (currentRoom == "Washington Square Park"){
 
-			room_north = "hallway";
+			room_north = "2 Bros. $1 Pizza";
 
-			myText = "you are in the entryway.\n";
-			myText += "The entryway is cool.";
+			myText = "It has been a long Friday night in the city. All of your friends have returned home, so you are all alone. Daylight is approaching and you must get back home soon.\n\n";
+			myText += "Wait, but first you are really hungry and only have a few bucks left on you!";
 
 
-		} else if ( currentRoom == "hallway") {
+		} else if ( currentRoom == "2 Bros. $1 Pizza") {
 
-			room_east = "kitchen";
-			room_south = "entry";
-			room_west = "locked door";
+			room_east = "subway";
+			room_south = "Washington Square Park";
+			room_west = "bar";
 
-			myText = "you are in the hallway.";
+			myText = "You are in 2 Bros. $1 Pizza.\n\n";
+			myText += "You are waiting in line and can't wait to get a slice. While you are waiting you decide to pull out your phone and text Jason to see if he got home ok.\n";
+			myText += "Uh oh, you lost your phone, which was also your wallet, which means you can't buy pizza.\n";
+			myText += "Retrace your steps and go find your phone!";
 
-		} else if ( currentRoom == "kitchen") {
+		} else if ( currentRoom == "subway") {
 
-			room_west = "hallway";
+			room_west = "2 Bros. $1 Pizza";
 
 			myText = "You are in the subway.";
 			if (!hasKey){
@@ -116,17 +119,17 @@ public class NightInTheCity : MonoBehaviour {
 			mainCam.backgroundColor = Color.white;
 			GetComponent<Text>().color = Color.black;
 
-			myText = "You found your phone! Press spacebar to return to the kitchen.";
+			myText = "You found your phone! Press spacebar to return to the subway.";
 			if (!hasKey) {
 				sfxSource.Play();
 			}
 			hasKey = true;
 
 			if (Input.GetKeyDown(KeyCode.Space)) {
-				currentRoom = "kitchen";
+				currentRoom = "subway";
 			}
 
-		}else if (currentRoom == "locked door") {
+		}else if (currentRoom == "bar") {
 
 			sfxSource.clip = winSound;
 			if (!sfxSource.isPlaying) {
@@ -134,14 +137,14 @@ public class NightInTheCity : MonoBehaviour {
 			}
 
 			if (hasKey) {
-				myText = "HEYOOOOO YOU GOT TO THE WIN ROOOM!!!! BOIIOIOIOIOING, NICE! Let'S ENJOY CAKE.";
+				myText = "You go the win room.";
 
 			} else {
 
-				myText = "Sorry, you unlucky person, you need a key.\n\n Press space to return to the subway";
+				myText = "Sorry, you didn't lose your phone here.\n\n Press space to return to the subway";
 
 				if (Input.GetKeyDown(KeyCode.Space)) {
-					currentRoom = "hallway";
+					currentRoom = "2 Bros. $1 Pizza";
 				}
 
 			}
@@ -161,7 +164,7 @@ public class NightInTheCity : MonoBehaviour {
 		myText += "\n\n";
 		if (room_north != "nil"){
 
-			myText += "Press Up to go to the " + room_north + "\n";
+			myText += "Press Up to go to " + room_north + "\n";
 
 			if (Input.GetKeyDown(KeyCode.UpArrow)) {
 
@@ -173,7 +176,7 @@ public class NightInTheCity : MonoBehaviour {
 
 		if (room_south != "nil"){
 
-			myText += "Press Down to go to the " + room_south + "\n";
+			myText += "Press Down to go to " + room_south + "\n";
 
 			if (Input.GetKeyDown(KeyCode.DownArrow)){
 
